@@ -1,0 +1,2 @@
+rootProject.name='LoLMeetUp'
+include ':app'
