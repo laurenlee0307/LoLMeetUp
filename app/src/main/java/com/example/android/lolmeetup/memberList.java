@@ -12,7 +12,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class memberList extends AppCompatActivity {
-
     private static final String TAG = "memberList";
 
     @Override
