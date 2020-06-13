@@ -5,13 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class memberList extends AppCompatActivity {
+
+    ListView memberList;
+    ArrayAdapter adapter;
+    List<String> arrayList;
+
     private static final String TAG = "memberList";
 
     @Override
@@ -19,8 +28,10 @@ public class memberList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_list);
 
-        ListView memberList = (ListView)findViewById(R.id.membersList);
+        memberList = findViewById(R.id.membersList);
         Log.d(TAG, "onCreate: Started.");
+
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
 
         ArrayList<String> arrayList = new ArrayList<>();
 
@@ -44,6 +55,26 @@ public class memberList extends AppCompatActivity {
                 }
             });
         };
+
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if ( id == R.id.sort1) {
+            Collections.sort(arrayList);
+            adapter.notifyDataSetChanged();
+        } else if (id == R.id.sort2) {
+            Collections.sort(arrayList, Collections.reverseOrder());
+            adapter.notifyDataSetChanged();
+        }
+        return true;
+    }
     }
 
 
